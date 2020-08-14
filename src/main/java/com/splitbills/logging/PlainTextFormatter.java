@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 
 public class PlainTextFormatter implements Formatter {
 
-    private final static String FORMAT = "%s %s %s %s";
+    private final static String FORMAT = "%s %s %s %s %n";
     private final static String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     @Override
