@@ -1,19 +1,21 @@
 package com.splitbills.logging;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LogRecord {
 
-    private LocalDateTime date;
-    private Level level;
-    private String message;
-    private Throwable throwable;
+    private final LocalDateTime date;
+    private final Level level;
+    private final String message;
+    private final Throwable thrown;
 
-    LogRecord(LocalDateTime date, Level level, String message, Throwable throwable) {
+    LogRecord(LocalDateTime date, Level level, String message, Throwable thrown) {
         this.date = date;
         this.level = level;
         this.message = message;
-        this.throwable = throwable;
+        this.thrown = thrown;
     }
 
     public LocalDateTime getDate() {
@@ -28,8 +30,16 @@ public class LogRecord {
         return message;
     }
 
-    public Throwable getThrowable() {
-        return throwable;
+    public Throwable getThrown() {
+        return thrown;
     }
 
+    public List<Object> getElements() {
+        List<Object> elements = new ArrayList<>();
+        elements.add(date);
+        elements.add(level);
+        elements.add(message);
+        elements.add(thrown);
+        return elements;
+    }
 }
