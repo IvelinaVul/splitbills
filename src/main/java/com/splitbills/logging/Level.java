@@ -7,10 +7,13 @@ public enum Level {
     WARN(4),
     INFO(5),
     DEBUG(6);
-    private int level;
+    private int value;
 
-    Level(int level) {
-        this.level = level;
+    Level(int value) {
+        this.value = value;
     }
 
+    public int getValue() {
+        return value;
+    }
 }
