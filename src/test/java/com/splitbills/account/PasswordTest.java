@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PasswordTest {
 
@@ -34,6 +33,18 @@ public class PasswordTest {
         char[] actual = password.toCharArray();
         Password.getHash(actual, salt);
         assertNotEquals(Arrays.toString(actual), password);
+    }
+
+    @Test
+    public void isValid() {
+        char[] validPassword = "ValidPassword1".toCharArray();
+        assertTrue(Password.isValid(validPassword));
+    }
+
+    @Test
+    public void isValidWithPasswordNotContainingDigit() {
+        char[] invalidPassword = "InvalidPas".toCharArray();
+        assertFalse(Password.isValid(invalidPassword));
     }
 
 }

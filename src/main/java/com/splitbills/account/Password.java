@@ -18,6 +18,7 @@ public class Password {
     private final static int ITERATIONS = 20000;
     private final static String HASH_ALGORITHM = "PBKDF2WithHmacSHA1";
     private final static Random RANDOM = new SecureRandom();
+    private final static int MIN_PASSWORD_LENGTH = 8;
     private final static Logger LOGGER = Logger.getLogger(Password.class.getName());
 
     public static byte[] generateSalt() {
@@ -74,6 +75,27 @@ public class Password {
         return Arrays.equals(actualHash, expectedHash);
     }
 
+    public static boolean isValid(char[] password) {
+        if (password == null) {
+            throw new IllegalArgumentException("Parameter password cannot be null");
+        }
+        if (password.length < MIN_PASSWORD_LENGTH) {
+            return false;
+        }
+        boolean containsUpperCaseLetter = false;
+        boolean containsLowerCaseLetter = false;
+        boolean containsDigit = false;
 
+        for (int i = 0; i < password.length; ++i) {
+            if (Character.isLowerCase(password[i])) {
+                containsLowerCaseLetter = true;
+            } else if (Character.isUpperCase(password[i])) {
+                containsUpperCaseLetter = true;
+            } else if (Character.isDigit(password[i])) {
+                containsDigit = true;
+            }
+        }
+        return containsUpperCaseLetter && containsLowerCaseLetter && containsDigit;
+    }
 
 }
