@@ -11,14 +11,14 @@ import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
 import java.util.Random;
 
-public class PasswordSecurity {
+public class Password {
 
-    private static final int SALT_BYTES = 16;
-    private static final int KEY_LENGTH = 256;
-    private static final int ITERATIONS = 20000;
-    private static final String HASH_ALGORITHM = "PBKDF2WithHmacSHA1";
+    private final static int SALT_BYTES = 16;
+    private final static int KEY_LENGTH = 256;
+    private final static int ITERATIONS = 20000;
+    private final static String HASH_ALGORITHM = "PBKDF2WithHmacSHA1";
     private final static Random RANDOM = new SecureRandom();
-    private final static Logger LOGGER = Logger.getLogger(PasswordSecurity.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(Password.class.getName());
 
     public static byte[] generateSalt() {
         byte[] salt = new byte[SALT_BYTES];
@@ -73,5 +73,7 @@ public class PasswordSecurity {
         clearPassword(password);
         return Arrays.equals(actualHash, expectedHash);
     }
+
+
 
 }
