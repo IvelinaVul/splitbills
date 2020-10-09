@@ -6,12 +6,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Record {
+public class PayRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private String id;
+    private int id;
+    private String lender;
+    private String debtor;
+    private double amount;
     private String reason;
-    private String message;
-    private String groupId;
+    private int groupId;
+
 }

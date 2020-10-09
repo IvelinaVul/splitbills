@@ -4,16 +4,18 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "group_table")
 public class Group {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private String id;
-    @ManyToMany(mappedBy = "group")
+    private int id;
+    private String name;
+    @ManyToMany(mappedBy = "groups")
     private List<User> users;
-    @OneToMany
+    @OneToMany(mappedBy = "groupId", cascade = CascadeType.ALL, targetEntity = Debt.class)
     private List<Debt> debts;
-    @OneToMany
-    private List<Record> history;
+    @OneToMany(mappedBy = "groupId", cascade = CascadeType.ALL, targetEntity = PayRecord.class)
+    private List<PayRecord> history;
+
 }

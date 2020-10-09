@@ -12,15 +12,9 @@ public class User {
     private char[] hashedPassword;
     @Column(nullable = false)
     private byte[] salt;
-    @ManyToMany(cascade = CascadeType.PERSIST) //fix add orphan?
-    @JoinTable(name = "User_Group",
-            joinColumns = @JoinColumn(name = "UserId"),
-            inverseJoinColumns = @JoinColumn(name = "GroupId"))
-    private List<BasicGroup> groups;
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    @JoinTable(name = "User_Friend",
-            joinColumns = @JoinColumn(name = "UserId"),
-            inverseJoinColumns = @JoinColumn(name = "FriendId"))
-    private List<Friend> friends;
-
+    @ManyToMany(cascade = CascadeType.ALL, targetEntity = Group.class)
+    @JoinTable(name = "user_group",
+            joinColumns = @JoinColumn(name = "username"),
+            inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private List<Group> groups;
 }
