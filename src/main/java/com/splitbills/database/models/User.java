@@ -33,4 +33,7 @@ public class User {
         return username;
     }
 
+    public List<Group> getGroups() {
+        return groups;
+    }
 }

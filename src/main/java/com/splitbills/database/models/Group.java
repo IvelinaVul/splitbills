@@ -1,6 +1,7 @@
 package com.splitbills.database.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,11 +12,25 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     private String name;
-    @ManyToMany(mappedBy = "groups")
+    @ManyToMany(mappedBy = "groups", cascade = CascadeType.PERSIST)
     private List<User> users;
     @OneToMany(mappedBy = "groupId", cascade = CascadeType.ALL, targetEntity = Debt.class)
     private List<Debt> debts;
     @OneToMany(mappedBy = "groupId", cascade = CascadeType.ALL, targetEntity = PayRecord.class)
     private List<PayRecord> history;
 
+    public Group() {
+        users = new ArrayList<>();
+        debts = new ArrayList<>();
+    }
+
+    public Group(String name, List<User> users) {
+        this.name = name;
+        this.users = users;
+        debts = new ArrayList<>();
+    }
+
+    public int getId() {
+        return id;
+    }
 }
