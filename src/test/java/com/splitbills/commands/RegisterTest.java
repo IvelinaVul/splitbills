@@ -28,8 +28,8 @@ public class RegisterTest {
     public void executeWithNoArguments() {
         List<String> arguments = new ArrayList<>();
         Register register = new Register();
-        Response response = register.execute(arguments);
-        assertEquals(Response.INVALID_ARGUMENTS, response);
+        Status response = register.execute(arguments);
+        assertEquals(Status.INVALID_ARGUMENTS, response);
     }
 
     @Test
@@ -44,8 +44,8 @@ public class RegisterTest {
                 .thenReturn(name);
 
         Register register = new Register(userRepository, groupRepository);
-        Response response = register.execute(arguments);
-        assertEquals(Response.OK, response);
+        Status response = register.execute(arguments);
+        assertEquals(Status.OK, response);
     }
 
     @Test
@@ -59,8 +59,8 @@ public class RegisterTest {
                 .thenThrow(UserAlreadyExistsException.class);
 
         Register register = new Register(userRepository, groupRepository);
-        Response response = register.execute(arguments);
-        assertEquals(Response.ALREADY_EXISTS, response);
+        Status response = register.execute(arguments);
+        assertEquals(Status.ALREADY_EXISTS, response);
 
     }
 

@@ -6,7 +6,7 @@ public interface UserRepository {
 
     String add(User user) throws UserAlreadyExistsException;
 
-    User get(String username);
+    User get(String username) throws NoSuchUserException;
 
     boolean contains(String username);
 }

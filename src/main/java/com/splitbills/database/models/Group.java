@@ -3,6 +3,7 @@ package com.splitbills.database.models;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "group_table")
@@ -32,5 +33,19 @@ public class Group {
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Group group = (Group) o;
+        return name.equals(group.name) &&
+                users.equals(group.users);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, users);
     }
 }

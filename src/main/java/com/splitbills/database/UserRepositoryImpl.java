@@ -49,12 +49,15 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User get(String username) {
+    public User get(String username) throws  NoSuchUserException{
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         User found = entityManager.find(User.class, username);
         entityManager.getTransaction().commit();
         entityManager.close();
+        if(found==null){
+            throw new NoSuchUserException();
+        }
         return found;
     }
 }

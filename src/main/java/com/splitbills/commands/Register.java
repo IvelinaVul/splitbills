@@ -20,22 +20,22 @@ public class Register extends Command {
     }
 
     @Override
-    public Response execute(List<String> arguments) {
+    public Status execute(List<String> arguments) {
         if (!isValid(arguments)) {
-            return Response.INVALID_ARGUMENTS;
+            return Status.INVALID_ARGUMENTS;
         }
         String username = arguments.get(0);
         String password = arguments.get(1);
         if (username == null || password == null) {
-            return Response.INVALID_ARGUMENTS;
+            return Status.INVALID_ARGUMENTS;
         }
-        Response response = Response.OK;
+        Status response = Status.OK;
         try {
             register(username, password.toCharArray());
         } catch (HashingException hashingException) {
-            response = Response.SERVER_ERROR;
+            response = Status.SERVER_ERROR;
         } catch (UserAlreadyExistsException userAlreadyExistsException) {
-            response = Response.ALREADY_EXISTS;
+            response = Status.ALREADY_EXISTS;
         }
         return response;
     }

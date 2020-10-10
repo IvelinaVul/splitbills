@@ -1,14 +1,16 @@
 package com.splitbills.commands;
 
-public enum Response {
+public enum Status {
     OK("ok"),
     ALREADY_EXISTS("already-exists"),
     INVALID_ARGUMENTS("invalid-arguments"),
-    SERVER_ERROR("server-error");
+    SERVER_ERROR("server-error"),
+    NOT_LOGGED_IN("not-logged-in"),
+    NOT_REGISTERED("not-registered");
     private String message;
 
-    Response(String message) {
+    Status(String message) {
         this.message = message;
     }
 
-    }
+}

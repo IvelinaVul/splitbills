@@ -26,6 +26,6 @@ public abstract class Command {
         this.groupRepository = groupRepository;
     }
 
-    public abstract Response execute(List<String> arguments) throws InvalidArgumentsException;
+    public abstract Status execute(List<String> arguments);
 
 }
