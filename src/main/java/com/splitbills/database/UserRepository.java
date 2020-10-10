@@ -4,7 +4,7 @@ import com.splitbills.database.models.User;
 
 public interface UserRepository {
 
-    void add(User user) throws UserAlreadyExistsException;
+    String add(User user) throws UserAlreadyExistsException;
 
     User get(String username);
 

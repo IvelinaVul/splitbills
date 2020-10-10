@@ -2,12 +2,22 @@ package com.splitbills.commands;
 
 import com.splitbills.account.HashingException;
 import com.splitbills.account.Password;
+import com.splitbills.database.GroupRepository;
 import com.splitbills.database.UserAlreadyExistsException;
+import com.splitbills.database.UserRepository;
 import com.splitbills.database.models.User;
 
 import java.util.List;
 
 public class Register extends Command {
+
+    public Register() {
+        super();
+    }
+
+    public Register(UserRepository userRepository, GroupRepository groupRepository) {
+        super(userRepository, groupRepository);
+    }
 
     @Override
     public Response execute(List<String> arguments) {

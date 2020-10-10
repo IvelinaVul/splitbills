@@ -14,7 +14,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void add(User user) throws UserAlreadyExistsException {
+    public String add(User user) throws UserAlreadyExistsException {
         if (user == null) {
             throw new IllegalArgumentException("Parameter user cannot be null");
         }
@@ -27,6 +27,7 @@ public class UserRepositoryImpl implements UserRepository {
             entityManager.getTransaction().commit();
             entityManager.close();
         }
+        return user.getUsername();
     }
 
     private boolean exists(String username) {
