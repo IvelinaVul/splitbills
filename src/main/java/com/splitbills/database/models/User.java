@@ -10,7 +10,7 @@ public class User {
     @Id
     private String username;
     @Column(nullable = false)
-    private char[] hashedPassword;
+    private byte[] hashedPassword;
     @Column(nullable = false)
     private byte[] salt;
     @ManyToMany(cascade = {CascadeType.PERSIST}, targetEntity = Group.class)
@@ -22,7 +22,7 @@ public class User {
     public User() {
     }
 
-    public User(String username, char[] hashedPassword, byte[] salt) {
+    public User(String username, byte[] hashedPassword, byte[] salt) {
         this.username = username;
         this.hashedPassword = hashedPassword;
         this.salt = salt;

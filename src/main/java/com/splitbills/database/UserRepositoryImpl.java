@@ -18,7 +18,7 @@ public class UserRepositoryImpl implements UserRepository {
         if (user == null) {
             throw new IllegalArgumentException("Parameter user cannot be null");
         }
-        if (exists(user)) {
+        if (exists(user.getUsername())) {
             throw new UserAlreadyExistsException("User with the same username exists");
         } else {
             EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -29,10 +29,10 @@ public class UserRepositoryImpl implements UserRepository {
         }
     }
 
-    private boolean exists(User user) {
+    private boolean exists(String username) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        User userWithSameUsername = entityManager.find(User.class, user.getUsername());
+        User userWithSameUsername = entityManager.find(User.class, username);
         entityManager.getTransaction().commit();
         entityManager.close();
 
@@ -40,11 +40,11 @@ public class UserRepositoryImpl implements UserRepository {
 
     }
 
-    public boolean contains(User user) {
-        if (user == null) {
-            throw new IllegalArgumentException("Parameter user cannot be null");
+    public boolean contains(String username) {
+        if (username == null) {
+            throw new IllegalArgumentException("Parameter username cannot be null");
         }
-        return exists(user);
+        return exists(username);
     }
 
     @Override

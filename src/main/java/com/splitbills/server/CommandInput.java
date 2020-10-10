@@ -1,10 +1,12 @@
 package com.splitbills.server;
 
+import java.util.List;
+
 public class CommandInput {
 
     private String clientToken;
     private String commandName;
-    private String[] commandArguments;
+    private List<String> commandArguments;
 
     public String getClientToken() {
         return clientToken;
@@ -14,7 +16,7 @@ public class CommandInput {
         return commandName;
     }
 
-    public String[] getCommandArguments() {
+    public List<String> getCommandArguments() {
         return commandArguments;
     }
 

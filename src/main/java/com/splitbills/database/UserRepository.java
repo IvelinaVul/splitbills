@@ -8,5 +8,5 @@ public interface UserRepository {
 
     User get(String username);
 
-    boolean contains(User user);
+    boolean contains(String username);
 }
