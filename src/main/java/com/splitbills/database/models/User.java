@@ -1,6 +1,9 @@
 package com.splitbills.database.models;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,13 +16,12 @@ public class User {
     private byte[] hashedPassword;
     @Column(nullable = false)
     private byte[] salt;
-    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE}, targetEntity = Group.class)
-    @JoinTable(name = "user_group",
-            joinColumns = @JoinColumn(name = "username"),
-            inverseJoinColumns = @JoinColumn(name = "group_id"))
+    @ManyToMany(mappedBy = "users", targetEntity = Group.class)
+
     private List<Group> groups;
 
     public User() {
+
     }
 
     public User(String username, byte[] hashedPassword, byte[] salt) {
@@ -33,7 +35,4 @@ public class User {
         return username;
     }
 
-    public List<Group> getGroups() {
-        return groups;
-    }
 }
