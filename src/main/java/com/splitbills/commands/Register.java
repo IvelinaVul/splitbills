@@ -19,7 +19,7 @@ public class Register extends Command {
     }
 
     @Override
-    public Result execute(List<String> arguments) {
+    public Result execute(List<String> arguments, String token) {
         if (!hasExpectedArguments(arguments)) {
             return new Result(Status.INVALID_ARGUMENTS);
         }
@@ -27,6 +27,9 @@ public class Register extends Command {
         String password = arguments.get(1);
         if (!hasValidCredentials(username, password)) {
             return new Result(Status.INVALID_ARGUMENTS);
+        }
+        if (loggedInUsers.containsKey(username) || token != null) {
+            return new Result(Status.ALREADY_LOGGED_IN);
         }
         if (userRepository.contains(username)) {
             return new Result(Status.ALREADY_EXISTS);
@@ -47,10 +50,8 @@ public class Register extends Command {
         return arguments != null && arguments.size() == expectedArguments;
 
     }
-
     private boolean hasValidCredentials(String username, String password) {
         return (username != null && password != null);
-
     }
 
     private void register(String username, char[] password) throws HashingException {

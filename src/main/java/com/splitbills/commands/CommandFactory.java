@@ -7,14 +7,11 @@ public class CommandFactory {
         CommandName commandName = CommandName.valueOf(inputName);
         Command command;
         switch (commandName) {
+            case LOGIN:
+                command = new Login();
+                break;
             case REGISTER:
                 command = new Register();
-                break;
-            case ADD_FRIEND:
-                command = new AddFriend();
-                break;
-            case ADD_GROUP:
-                command=new AddGroup();
                 break;
             default:
                 throw new InvalidCommandException("There is no command with the given name");

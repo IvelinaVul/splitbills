@@ -25,7 +25,8 @@ public class RegisterTest {
     public void executeWithNoArguments() {
         List<String> arguments = new ArrayList<>();
         Register register = new Register();
-        Result result = register.execute(arguments);
+        String token = null;
+        Result result = register.execute(arguments,token);
         assertEquals(Status.INVALID_ARGUMENTS, result.getStatus());
     }
 
@@ -38,7 +39,8 @@ public class RegisterTest {
         arguments.add(password);
         when(userRepository.contains(name)).thenReturn(false);
         Register register = new Register(userRepository, groupRepository);
-        Result result = register.execute(arguments);
+        String token = null;
+        Result result = register.execute(arguments,token);
         assertEquals(Status.OK, result.getStatus());
     }
 
@@ -51,7 +53,8 @@ public class RegisterTest {
         arguments.add(password);
         when(userRepository.contains(takenName)).thenReturn(true);
         Register register = new Register(userRepository, groupRepository);
-        Result result = register.execute(arguments);
+        String token = null;
+        Result result = register.execute(arguments,token);
         assertEquals(Status.ALREADY_EXISTS, result.getStatus());
 
     }

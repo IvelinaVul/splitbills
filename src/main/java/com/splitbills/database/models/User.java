@@ -35,4 +35,11 @@ public class User {
         return username;
     }
 
+    public byte[] getHashedPassword() {
+        return hashedPassword;
+    }
+
+    public byte[] getSalt() {
+        return salt;
+    }
 }
