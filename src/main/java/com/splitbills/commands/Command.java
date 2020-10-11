@@ -26,6 +26,6 @@ public abstract class Command {
         this.groupRepository = groupRepository;
     }
 
-    public abstract Status execute(List<String> arguments);
+    public abstract Result execute(List<String> arguments);
 
 }

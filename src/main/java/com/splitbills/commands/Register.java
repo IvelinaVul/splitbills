@@ -19,26 +19,26 @@ public class Register extends Command {
     }
 
     @Override
-    public Status execute(List<String> arguments) {
+    public Result execute(List<String> arguments) {
         if (!hasExpectedArguments(arguments)) {
-            return Status.INVALID_ARGUMENTS;
+            return new Result(Status.INVALID_ARGUMENTS);
         }
         String username = arguments.get(0);
         String password = arguments.get(1);
         if (!hasValidCredentials(username, password)) {
-            return Status.INVALID_ARGUMENTS;
+            return new Result(Status.INVALID_ARGUMENTS);
         }
         if (userRepository.contains(username)) {
-            return Status.ALREADY_EXISTS;
+            return new Result(Status.ALREADY_EXISTS);
         }
 
-        Status response = Status.OK;
+        Status status = Status.OK;
         try {
             register(username, password.toCharArray());
         } catch (HashingException hashingException) {
-            response = Status.SERVER_ERROR;
+            status = Status.SERVER_ERROR;
         }
-        return response;
+        return new Result(status);
     }
 
     private boolean hasExpectedArguments(List<String> arguments) {
