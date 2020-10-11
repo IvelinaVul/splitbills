@@ -50,6 +50,7 @@ public class Login extends Command {
             return new Result(Status.SERVER_ERROR);
         }
         String token = generateAuthenticationToken();
+        loggedInUsers.put(username, token);
         List<String> resultArguments = new ArrayList<>();
         resultArguments.add(token);
         return new Result(Status.OK, resultArguments);
