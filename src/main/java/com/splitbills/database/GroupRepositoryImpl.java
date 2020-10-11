@@ -16,14 +16,17 @@ public class GroupRepositoryImpl implements GroupRepository {
     }
 
     @Override
-    public int add(Group group) {
+    public Long add(Group group) {
         if (group == null) {
             throw new IllegalArgumentException("Parameter group cannot be null");
         }
-
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        entityManager.persist(group);
+        if (group.getId() == null) {
+            entityManager.persist(group);
+        } else {
+            entityManager.merge(group);
+        }
         entityManager.getTransaction().commit();
         entityManager.close();
         return group.getId();
@@ -31,6 +34,9 @@ public class GroupRepositoryImpl implements GroupRepository {
 
     @Override
     public List<Group> getAll(String username) {
+        if (username == null) {
+            throw new IllegalArgumentException("Parameter username cannot be null");
+        }
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         User found = entityManager.find(User.class, username);

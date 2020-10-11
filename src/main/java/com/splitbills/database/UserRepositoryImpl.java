@@ -14,19 +14,22 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public String add(User user) throws UserAlreadyExistsException {
+    public String add(User user)  {
         if (user == null) {
             throw new IllegalArgumentException("Parameter user cannot be null");
         }
-        if (exists(user.getUsername())) {
-            throw new UserAlreadyExistsException("User with the same username exists");
-        } else {
-            EntityManager entityManager = entityManagerFactory.createEntityManager();
-            entityManager.getTransaction().begin();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        if (!exists(user.getUsername())) {
             entityManager.persist(user);
-            entityManager.getTransaction().commit();
-            entityManager.close();
+
+        } else {
+            entityManager.merge(user);
+
         }
+        entityManager.getTransaction().commit();
+        entityManager.close();
         return user.getUsername();
     }
 
@@ -49,15 +52,12 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User get(String username) throws  NoSuchUserException{
+    public User get(String username)  {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         User found = entityManager.find(User.class, username);
         entityManager.getTransaction().commit();
         entityManager.close();
-        if(found==null){
-            throw new NoSuchUserException();
-        }
         return found;
     }
 }

@@ -13,7 +13,7 @@ public class User {
     private byte[] hashedPassword;
     @Column(nullable = false)
     private byte[] salt;
-    @ManyToMany(cascade = {CascadeType.PERSIST}, targetEntity = Group.class)
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE}, targetEntity = Group.class)
     @JoinTable(name = "user_group",
             joinColumns = @JoinColumn(name = "username"),
             inverseJoinColumns = @JoinColumn(name = "group_id"))

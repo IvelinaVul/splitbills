@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface GroupRepository {
 
-    int add(Group group);
+    Long add(Group group);
 
     List<Group> getAll(String username);
 }

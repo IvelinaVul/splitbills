@@ -11,9 +11,9 @@ public class Group {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private Long id;
     private String name;
-    @ManyToMany(mappedBy = "groups", cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "groups", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<User> users;
     @OneToMany(mappedBy = "groupId", cascade = CascadeType.ALL, targetEntity = Debt.class)
     private List<Debt> debts;
@@ -31,7 +31,7 @@ public class Group {
         debts = new ArrayList<>();
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
