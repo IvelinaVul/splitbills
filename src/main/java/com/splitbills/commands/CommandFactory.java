@@ -13,6 +13,9 @@ public class CommandFactory {
             case REGISTER:
                 command = new Register();
                 break;
+            case ADD_GROUP:
+                command = new AddGroup();
+                break;
             default:
                 throw new InvalidCommandException("There is no command with the given name");
         }
