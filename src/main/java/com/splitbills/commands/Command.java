@@ -17,14 +17,6 @@ public abstract class Command {
     protected GroupRepository groupRepository;
     protected Map<String, String> loggedInUsers;
 
-    public Command() {
-        String persistenceUnit = "account";
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory(persistenceUnit);
-        this.userRepository = new UserRepositoryImpl(entityManagerFactory);
-        this.groupRepository = new GroupRepositoryImpl(entityManagerFactory);
-        this.loggedInUsers = new HashMap<>();
-    }
-
     public Command(UserRepository userRepository, GroupRepository groupRepository) {
         this.userRepository = userRepository;
         this.groupRepository = groupRepository;

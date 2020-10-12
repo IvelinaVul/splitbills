@@ -2,6 +2,8 @@ package com.splitbills.commands;
 
 import com.splitbills.account.HashingException;
 import com.splitbills.account.Password;
+import com.splitbills.database.GroupRepository;
+import com.splitbills.database.UserRepository;
 import com.splitbills.database.models.User;
 
 import java.security.SecureRandom;
@@ -13,6 +15,10 @@ public class Login extends Command {
 
     private static final SecureRandom secureRandom = new SecureRandom();
     private static final Base64.Encoder base64Encoder = Base64.getUrlEncoder();
+
+    public Login(UserRepository userRepository, GroupRepository groupRepository) {
+        super(userRepository, groupRepository);
+    }
 
     @Override
     public Result execute(List<String> arguments, String token) {

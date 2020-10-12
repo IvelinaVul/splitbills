@@ -10,9 +10,6 @@ import java.util.List;
 
 public class Register extends Command {
 
-    public Register() {
-        super();
-    }
 
     public Register(UserRepository userRepository, GroupRepository groupRepository) {
         super(userRepository, groupRepository);

@@ -24,7 +24,7 @@ public class RegisterTest {
     @Test
     public void executeWithNoArguments() {
         List<String> arguments = new ArrayList<>();
-        Register register = new Register();
+        Register register = new Register(userRepository,groupRepository);
         String token = null;
         Result result = register.execute(arguments,token);
         assertEquals(Status.INVALID_ARGUMENTS, result.getStatus());

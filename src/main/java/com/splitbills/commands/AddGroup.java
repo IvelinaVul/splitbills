@@ -1,5 +1,7 @@
 package com.splitbills.commands;
 
+import com.splitbills.database.GroupRepository;
+import com.splitbills.database.UserRepository;
 import com.splitbills.database.models.Group;
 import com.splitbills.database.models.User;
 
@@ -7,6 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddGroup extends Command {
+
+    public AddGroup(UserRepository userRepository, GroupRepository groupRepository) {
+        super(userRepository, groupRepository);
+    }
 
     @Override
     public Result execute(List<String> arguments, String token) {
