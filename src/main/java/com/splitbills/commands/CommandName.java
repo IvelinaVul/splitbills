@@ -1,6 +1,7 @@
 package com.splitbills.commands;
 
 public enum CommandName {
+    HELP("help"),
     LOGIN("login"),
     REGISTER("register"),
     ADD_FRIEND("add-friend"),

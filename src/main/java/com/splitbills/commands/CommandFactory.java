@@ -14,10 +14,13 @@ public class CommandFactory {
     }
 
     public Command getCommand(String inputName) throws InvalidCommandException {
-        inputName = inputName.toLowerCase().trim();
+        inputName = inputName.toUpperCase().trim();
         CommandName commandName = CommandName.valueOf(inputName);
         Command command;
         switch (commandName) {
+            case HELP:
+                command = new Help(userRepository, groupRepository);
+                break;
             case LOGIN:
                 command = new Login(userRepository, groupRepository);
                 break;
