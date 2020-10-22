@@ -49,7 +49,7 @@ public class EventProcessor implements Runnable {
 
     private List<Task> getNewTasks(int number) {
         List<Task> tasks = new ArrayList<>(number);
-        newTasks.drainTo(newTasks, number);
+        newTasks.drainTo(tasks, number);
         return tasks;
     }
 
