@@ -72,6 +72,4 @@ public class Server {
         }
         LOGGER.log(Level.INFO, "Server stopped");
     }
-
-
 }
