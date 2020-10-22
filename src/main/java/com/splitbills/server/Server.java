@@ -51,13 +51,13 @@ public class Server {
         return selector;
     }
 
-    private void start() {
+    public void start() {
         new Thread(eventDistributor).start();
         new Thread(eventProcessor).start();
         LOGGER.log(Level.INFO, "Server started");
     }
 
-    private void stop() {
+    public void stop() {
         eventProcessor.stop();
         eventDistributor.stop();
         try {
