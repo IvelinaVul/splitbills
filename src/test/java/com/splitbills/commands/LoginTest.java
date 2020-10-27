@@ -11,7 +11,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -26,7 +28,8 @@ public class LoginTest {
 
     @Test
     public void loginWithNotExistingUser() {
-        Login login = new Login(userRepository, groupRepository);
+        Map<String,String> loggedInUsers= new HashMap<>();
+        Login login = new Login(userRepository, groupRepository,loggedInUsers);
         String username = "NotExisting";
         String password = "password";
         when(userRepository.get(username)).thenReturn(null);
@@ -40,7 +43,8 @@ public class LoginTest {
 
     @Test
     public void loginWithExistingUser() throws HashingException {
-        Login login = new Login(userRepository, groupRepository);
+        Map<String,String> loggedInUsers= new HashMap<>();
+        Login login = new Login(userRepository, groupRepository,loggedInUsers);
         String username = "existing";
         String password = "password";
         byte[] salt = Password.generateSalt();

@@ -7,11 +7,12 @@ import com.splitbills.database.models.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class AddGroup extends Command {
 
-    AddGroup(UserRepository userRepository, GroupRepository groupRepository) {
-        super(userRepository, groupRepository);
+    AddGroup(UserRepository userRepository, GroupRepository groupRepository, Map<String, String> loggedInUsers) {
+        super(userRepository, groupRepository, loggedInUsers);
     }
 
     @Override
@@ -22,6 +23,13 @@ public class AddGroup extends Command {
         String groupName = arguments.get(0);
         if (groupName == null) {
             return new Result(Status.INVALID_ARGUMENTS);
+        }
+        String groupCreator = arguments.get(1);
+        if (!loggedInUsers.containsKey(groupCreator)) {
+            return new Result(Status.NOT_LOGGED_IN);
+        }
+        if (!loggedInUsers.get(groupCreator).equals(token)) {
+            return new Result(Status.NOT_LOGGED_IN);
         }
         List<User> users;
         try {
@@ -36,7 +44,6 @@ public class AddGroup extends Command {
 
     private boolean isValid(List<String> arguments) {
         int expectedAtLeast = 3;
-
         return arguments != null && arguments.size() >= expectedAtLeast;
     }
 
@@ -44,7 +51,7 @@ public class AddGroup extends Command {
         List<User> users = new ArrayList<>();
         for (int i = 1; i < usernames.size(); ++i) {
             User current = userRepository.get(usernames.get(i));
-            if (current != null) {
+            if (current == null) {
                 throw new NoSuchUserException();
             }
             users.add(current);

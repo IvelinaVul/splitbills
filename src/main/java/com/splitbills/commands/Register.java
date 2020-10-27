@@ -7,11 +7,12 @@ import com.splitbills.database.UserRepository;
 import com.splitbills.database.models.User;
 
 import java.util.List;
+import java.util.Map;
 
 public class Register extends Command {
 
-    Register(UserRepository userRepository, GroupRepository groupRepository) {
-        super(userRepository, groupRepository);
+    Register(UserRepository userRepository, GroupRepository groupRepository, Map<String,String> loggedInUsers) {
+        super(userRepository, groupRepository,loggedInUsers);
     }
 
     @Override

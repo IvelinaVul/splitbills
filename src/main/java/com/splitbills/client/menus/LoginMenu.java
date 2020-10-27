@@ -40,13 +40,14 @@ public class LoginMenu extends Menu {
         String username = reader.readNextLine();
         writer.writeWithNewLine("Please enter your password");
         String password = reader.readNextLine();
+        userLoginInfo.setUsername(username);
         List<String> arguments = new ArrayList<>();
         arguments.add(username);
         arguments.add(password);
         return arguments;
     }
 
-    private void handleResponse(Response response) {
+    private void handleResponse( Response response) {
         switch (response.getStatus()) {
             case OK:
                 writer.writeWithNewLine("Successful login");

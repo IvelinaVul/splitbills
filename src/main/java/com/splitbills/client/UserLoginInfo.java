@@ -4,6 +4,7 @@ public class UserLoginInfo {
 
     private String authenticationToken;
     private boolean loggedIn = false;
+    private String username;
 
     public String getAuthenticationToken() {
         return authenticationToken;
@@ -19,5 +20,13 @@ public class UserLoginInfo {
 
     public boolean isLoggedIn() {
         return loggedIn;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
     }
 }
