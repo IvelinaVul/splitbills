@@ -14,7 +14,7 @@ public class RegisterMenu extends Menu {
 
     private final static Logger LOGGER = Logger.getLogger(RegisterMenu.class.getName());
 
-    public RegisterMenu(SplitbillsClient splitbillsClient, UserStorage storage, Reader reader, Writer writer) {
+    public RegisterMenu(SplitbillsClient splitbillsClient, UserLoginInfo storage, Reader reader, Writer writer) {
         super(splitbillsClient, storage, reader, writer);
     }
 

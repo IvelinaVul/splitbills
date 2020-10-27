@@ -1,6 +1,6 @@
 package com.splitbills.client;
 
-public class UserStorage {
+public class UserLoginInfo {
 
     private String authenticationToken;
     private boolean loggedIn = false;
