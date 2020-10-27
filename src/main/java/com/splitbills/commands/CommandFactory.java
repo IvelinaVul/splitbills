@@ -15,25 +15,18 @@ public class CommandFactory {
 
     public Command getCommand(String inputName) throws InvalidCommandException {
         inputName = inputName.toUpperCase().trim();
-        CommandName commandName = CommandName.valueOf(inputName);
-        Command command;
+        CommandName commandName = CommandName.getCommandName(inputName);
         switch (commandName) {
             case HELP:
-                command = new Help(userRepository, groupRepository);
-                break;
+                return new Help(userRepository, groupRepository);
             case LOGIN:
-                command = new Login(userRepository, groupRepository);
-                break;
+                return new Login(userRepository, groupRepository);
             case REGISTER:
-                command = new Register(userRepository, groupRepository);
-                break;
+                return new Register(userRepository, groupRepository);
             case ADD_GROUP:
-                command = new AddGroup(userRepository, groupRepository);
-                break;
-            default:
-                throw new InvalidCommandException("There is no command with the given name");
+                return new AddGroup(userRepository, groupRepository);
         }
-        return command;
+        throw new InvalidCommandException("No such command");
     }
 
 }
