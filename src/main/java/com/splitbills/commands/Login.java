@@ -10,14 +10,15 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 
 public class Login extends Command {
 
     private static final SecureRandom secureRandom = new SecureRandom();
     private static final Base64.Encoder base64Encoder = Base64.getUrlEncoder();
 
-    Login(UserRepository userRepository, GroupRepository groupRepository) {
-        super(userRepository, groupRepository);
+    Login(UserRepository userRepository, GroupRepository groupRepository, Map<String,String> loggedInUsers) {
+        super(userRepository, groupRepository,loggedInUsers);
     }
 
     @Override
