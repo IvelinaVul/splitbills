@@ -3,7 +3,6 @@ package com.splitbills.commands;
 import java.util.Arrays;
 
 public enum CommandName {
-    HELP("help"),
     LOGIN("login"),
     REGISTER("register"),
     ADD_FRIEND("add-friend"),

@@ -17,8 +17,6 @@ public class CommandFactory {
         inputName = inputName.toUpperCase().trim();
         CommandName commandName = CommandName.getCommandName(inputName);
         switch (commandName) {
-            case HELP:
-                return new Help(userRepository, groupRepository);
             case LOGIN:
                 return new Login(userRepository, groupRepository);
             case REGISTER:
