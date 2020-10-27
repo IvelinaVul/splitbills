@@ -11,8 +11,8 @@ import java.util.Map;
 
 public class AddGroup extends Command {
 
-    AddGroup(UserRepository userRepository, GroupRepository groupRepository, Map<String,String> loggedInUsers) {
-        super(userRepository, groupRepository,loggedInUsers);
+    AddGroup(UserRepository userRepository, GroupRepository groupRepository, Map<String, String> loggedInUsers) {
+        super(userRepository, groupRepository, loggedInUsers);
     }
 
     @Override
@@ -26,6 +26,9 @@ public class AddGroup extends Command {
         }
         String groupCreator = arguments.get(1);
         if (!loggedInUsers.containsKey(groupCreator)) {
+            return new Result(Status.NOT_LOGGED_IN);
+        }
+        if (!loggedInUsers.get(groupCreator).equals(token)) {
             return new Result(Status.NOT_LOGGED_IN);
         }
         List<User> users;
