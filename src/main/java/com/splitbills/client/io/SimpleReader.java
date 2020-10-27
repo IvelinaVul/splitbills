@@ -11,9 +11,8 @@ public class SimpleReader implements Reader {
         delimiter = " ";
         scanner = new Scanner(System.in);
     }
-
-    public String readNext() {
-        return scanner.next();
+    public String readNextLine() {
+        return scanner.nextLine().trim();
     }
 
     public String[] readAllTillNextLine() {

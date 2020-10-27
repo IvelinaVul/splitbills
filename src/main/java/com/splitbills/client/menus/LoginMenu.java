@@ -10,11 +10,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegisterMenu extends Menu {
+public class LoginMenu extends Menu {
 
-    private final static Logger LOGGER = Logger.getLogger(RegisterMenu.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(LoginMenu.class.getName());
 
-    public RegisterMenu(SplitbillsClient splitbillsClient, UserLoginInfo storage, Reader reader, Writer writer) {
+    public LoginMenu(SplitbillsClient splitbillsClient, UserLoginInfo storage, Reader reader, Writer writer) {
         super(splitbillsClient, storage, reader, writer);
     }
 
@@ -22,9 +22,9 @@ public class RegisterMenu extends Menu {
     public void run() {
         try {
             List<String> arguments = readCommandArguments();
-            Command register = new Command(CommandName.REGISTER.toString(), arguments);
-            Response response = splitbillsClient.sendCommand(register);
-            writeResponse(response);
+            Command command = new Command(CommandName.LOGIN.toString(), arguments);
+            Response response = splitbillsClient.sendCommand(command);
+            handleResponse(response);
         } catch (DisconnectedException disconnectedException) {
             writer.writeWithNewLine("A problem occurred. Please try again later");
             LOGGER.log(Level.ERROR, "Disconnected from server while sending request",
@@ -46,17 +46,17 @@ public class RegisterMenu extends Menu {
         return arguments;
     }
 
-    private void writeResponse(Response response) {
+    private void handleResponse(Response response) {
         switch (response.getStatus()) {
             case OK:
-                writer.writeWithNewLine("Successful registration");
+                writer.writeWithNewLine("Successful login");
+                updateUserLoginInfo(response.getArguments());
                 break;
-            case INVALID_ARGUMENTS:
-                writer.writeWithNewLine("The provided arguments are not valid. Please try again");
+            case NOT_MATCHING_ARGUMENTS:
+                writer.writeWithNewLine("The username or password does not match. Please try again");
                 break;
-            case ALREADY_EXISTS:
-                writer.writeWithNewLine("The username is already taken. Please try again" +
-                        " with another username");
+            case NOT_REGISTERED:
+                writer.writeWithNewLine("No user with the provided username exists");
                 break;
             default:
                 writer.writeWithNewLine("A problem occurred. Please try again later");
@@ -64,4 +64,12 @@ public class RegisterMenu extends Menu {
         }
         writer.writeNewLine();
     }
+
+    private void updateUserLoginInfo(List<String> arguments) {
+        int first = 0;
+        String token = arguments.get(first);
+        userLoginInfo.setLoggedIn(true);
+        userLoginInfo.setAuthenticationToken(token);
+    }
+
 }

@@ -48,10 +48,10 @@ public class Login extends Command {
     private Result login(String username, char[] password) {
         try {
             if (!isCorrectPassword(username, password)) {
-                return new Result(Status.INVALID_ARGUMENTS);
+                return new Result(Status.NOT_MATCHING_ARGUMENTS);
             }
         } catch (NoSuchUserException noSuchUserException) {
-            return new Result(Status.NOT_EXISTING);
+            return new Result(Status.NOT_REGISTERED);
         } catch (HashingException hashingException) {
             return new Result(Status.SERVER_ERROR);
         }

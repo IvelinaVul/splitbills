@@ -9,6 +9,7 @@ public enum Status {
     ALREADY_LOGGED_IN("already-logged-in"),
     NOT_EXISTING("not-existing"),
     NOT_REGISTERED("not-registered"),
+    NOT_MATCHING_ARGUMENTS("not-matching"),
     INVALID_COMMAND("invalid-command");
     private String message;
 
