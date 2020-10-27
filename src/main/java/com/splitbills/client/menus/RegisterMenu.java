@@ -37,9 +37,9 @@ public class RegisterMenu extends Menu {
 
     private List<String> readCommandArguments() {
         writer.writeWithNewLine("Please enter your username");
-        String username = reader.readNext();
+        String username = reader.readNextLine();
         writer.writeWithNewLine("Please enter your password");
-        String password = reader.readNext();
+        String password = reader.readNextLine();
         List<String> arguments = new ArrayList<>();
         arguments.add(username);
         arguments.add(password);
