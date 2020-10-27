@@ -43,10 +43,8 @@ public class EventDistributor implements Runnable {
     }
 
     private void registerWriteEventsForCompletedTasks(int maxTasks) {
-        Queue<Task> writeTasks = getNewTasks(maxTasks);
-        int tasksCount = 0;
-        while (!writeTasks.isEmpty() && tasksCount <= maxTasks) {
-            Task task = writeTasks.poll();
+        List<Task> writeTasks = getNewTasks(maxTasks);
+        for (Task task : writeTasks) {
             SocketChannel socketChannel = task.getSocketChannel();
             String response = task.getResponse();
 
@@ -58,14 +56,12 @@ public class EventDistributor implements Runnable {
                     LOGGER.log(Level.ERROR, "Remote closed the channel", closedChannelException);
                 }
             }
-            ++tasksCount;
+
         }
     }
 
-
-
-    private synchronized Queue<Task> getNewTasks(int maxTasks) {
-        Queue<Task> writeEvents = new ArrayDeque<>();
+    private List<Task> getNewTasks(int maxTasks) {
+        List<Task> writeEvents = new ArrayList<>();
         completedTasks.drainTo(writeEvents, maxTasks);
         return writeEvents;
     }
@@ -95,7 +91,8 @@ public class EventDistributor implements Runnable {
     private Iterator<SelectionKey> getSelectedKeys() {
         Iterator<SelectionKey> selectedKeysIterator;
         try {
-            selector.select();
+            int timeout = 100;
+            selector.select(timeout);
             Set<SelectionKey> selectedKeys = selector.selectedKeys();
             selectedKeysIterator = selectedKeys.iterator();
         } catch (IOException ioException) {

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class AddGroup extends Command {
 
-    public AddGroup(UserRepository userRepository, GroupRepository groupRepository) {
+    AddGroup(UserRepository userRepository, GroupRepository groupRepository) {
         super(userRepository, groupRepository);
     }
 

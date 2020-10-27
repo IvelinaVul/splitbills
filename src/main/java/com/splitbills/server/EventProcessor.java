@@ -47,9 +47,9 @@ public class EventProcessor implements Runnable {
         }
     }
 
-    private List<Task> getNewTasks(int number) {
+    private  List<Task> getNewTasks(int number) {
         List<Task> tasks = new ArrayList<>(number);
-        newTasks.drainTo(newTasks, number);
+        newTasks.drainTo(tasks, number);
         return tasks;
     }
 
@@ -58,8 +58,10 @@ public class EventProcessor implements Runnable {
         Result result;
         try {
             result = executeCommand(input);
+            completeTask(task, result);
         } catch (InvalidCommandException invalidCommandException) {
             result = new Result(Status.INVALID_COMMAND);
+            completeTask(task, result);
         }
 
     }
@@ -73,6 +75,7 @@ public class EventProcessor implements Runnable {
         String response = gson.toJson(result);
         task.setResponse(response);
         completedTasks.add(task);
+
     }
 
     public void stop() {

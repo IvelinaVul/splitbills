@@ -1,9 +1,6 @@
 package com.splitbills.database.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,12 +13,12 @@ public class User {
     private byte[] hashedPassword;
     @Column(nullable = false)
     private byte[] salt;
-    @ManyToMany(mappedBy = "users", targetEntity = Group.class)
+    @ManyToMany(mappedBy = "users", targetEntity = Group.class, fetch = FetchType.LAZY)
 
     private List<Group> groups;
 
     public User() {
-
+        groups = new ArrayList<>();
     }
 
     public User(String username, byte[] hashedPassword, byte[] salt) {
@@ -42,4 +39,9 @@ public class User {
     public byte[] getSalt() {
         return salt;
     }
+
+    public List<Group> getGroups() {
+        return groups;
+    }
+
 }

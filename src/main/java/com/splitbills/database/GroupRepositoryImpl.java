@@ -5,8 +5,7 @@ import com.splitbills.database.models.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,20 +29,20 @@ public class GroupRepositoryImpl implements GroupRepository {
         entityManager.close();
         return group.getId();
     }
-
     @Override
     public List<Group> getAll(String username) {
         if (username == null) {
             throw new IllegalArgumentException("Parameter username cannot be null");
         }
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        String hql = "SELECT G FROM Group G JOIN G.users U WHERE U.username= :username";
-        Query query = entityManager.createQuery(hql, Group.class)
-                .setParameter("username", username);
-
-        List<Group> groups = query.getResultList();
+        entityManager.getTransaction().begin();
+        User user = entityManager.find(User.class, username);
+        entityManager.getTransaction().commit();
         entityManager.close();
-        return groups;
+        if (user != null) {
+            return user.getGroups();
+        }
+        return new ArrayList<>();
     }
 
 }
