@@ -10,8 +10,7 @@ import java.util.List;
 
 public class Register extends Command {
 
-
-    public Register(UserRepository userRepository, GroupRepository groupRepository) {
+    Register(UserRepository userRepository, GroupRepository groupRepository) {
         super(userRepository, groupRepository);
     }
 
@@ -47,6 +46,7 @@ public class Register extends Command {
         return arguments != null && arguments.size() == expectedArguments;
 
     }
+
     private boolean hasValidCredentials(String username, String password) {
         return (username != null && password != null);
     }

@@ -16,7 +16,7 @@ public class Login extends Command {
     private static final SecureRandom secureRandom = new SecureRandom();
     private static final Base64.Encoder base64Encoder = Base64.getUrlEncoder();
 
-    public Login(UserRepository userRepository, GroupRepository groupRepository) {
+    Login(UserRepository userRepository, GroupRepository groupRepository) {
         super(userRepository, groupRepository);
     }
 
