@@ -13,4 +13,13 @@ public class Debt {
     private double amount;
     private Long groupId;
 
+    public Debt() {
+        amount = 0;
+    }
+
+    public Debt(String lender, String debtor, double amount) {
+        this.lender = lender;
+        this.debtor = debtor;
+        this.amount = amount;
+    }
 }

@@ -17,7 +17,8 @@ public class Group {
             joinColumns = @JoinColumn(name = "group_id"),
             inverseJoinColumns = @JoinColumn(name = "username"))
     private List<User> users;
-    @OneToMany(mappedBy = "groupId", cascade = CascadeType.ALL, targetEntity = Debt.class, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = Debt.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "groupId")
     private List<Debt> debts;
     @OneToMany(mappedBy = "groupId", cascade = CascadeType.ALL, targetEntity = PayRecord.class, fetch = FetchType.LAZY)
     private List<PayRecord> history;
