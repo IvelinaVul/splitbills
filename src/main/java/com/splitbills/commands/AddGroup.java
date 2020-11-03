@@ -60,11 +60,11 @@ public class AddGroup extends Command {
 
         Group group = new Group(groupName, groupUsers);
 
-        List<Debt> debts = getDebts(group, usernames);
+        List<Debt> debts = getDebts(usernames);
         for (Debt debt : debts) {
             group.addDebt(debt);
         }
-        groupRepository.add(group);
+        groupRepository.addGroup(group);
 
     }
 
@@ -80,7 +80,7 @@ public class AddGroup extends Command {
         return users;
     }
 
-    private List<Debt> getDebts(Group group, List<String> usernames) {
+    private List<Debt> getDebts(List<String> usernames) {
         List<Debt> debts = new ArrayList<>();
         double amount = 0;
         for (int i = 0; i < usernames.size() - 1; ++i) {
