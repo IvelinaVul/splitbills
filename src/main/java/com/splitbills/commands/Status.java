@@ -3,6 +3,7 @@ package com.splitbills.commands;
 public enum Status {
     OK("ok"),
     ALREADY_EXISTS("already-exists"),
+    NOT_EXISTING("not-existing"),
     INVALID_ARGUMENTS("invalid-arguments"),
     NOT_MATCHING_ARGUMENTS("not-matching"),
     SERVER_ERROR("server-error"),
