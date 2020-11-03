@@ -28,6 +28,8 @@ public class CommandFactory {
                 return new Register(userRepository, groupRepository,loggedInUsers);
             case ADD_GROUP:
                 return new AddGroup(userRepository, groupRepository,loggedInUsers);
+            case SPLIT_GROUP:
+                return new SplitGroup(userRepository,groupRepository,loggedInUsers);
         }
         throw new InvalidCommandException("No such command");
     }

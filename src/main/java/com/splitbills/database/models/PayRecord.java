@@ -17,4 +17,14 @@ public class PayRecord {
     private String reason;
     private Long groupId;
 
+    public PayRecord() {
+
+    }
+
+    public PayRecord(String lender, String debtor, double amount, String reason) {
+        this.lender = lender;
+        this.debtor = debtor;
+        this.amount = amount;
+        this.reason = reason;
+    }
 }
