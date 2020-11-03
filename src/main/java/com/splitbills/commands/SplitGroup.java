@@ -34,6 +34,9 @@ public class SplitGroup extends Command {
             return new Result(Status.NOT_LOGGED_IN);
         }
         double fullAmount = Double.parseDouble(amountToBeSplit);
+        if (fullAmount <= 0) {
+            return new Result(Status.INVALID_ARGUMENTS);
+        }
         try {
             if (!isPartOfTheGroup(username, groupName)) {
                 return new Result(Status.INVALID_ARGUMENTS);

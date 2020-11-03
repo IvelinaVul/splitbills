@@ -61,7 +61,7 @@ public class SplitGroupMenu extends Menu {
                 writer.writeWithNewLine("No such group exists.");
                 break;
             case INVALID_ARGUMENTS:
-                writer.writeWithNewLine("The provided groupname does not match any of your groups");
+                writer.writeWithNewLine("The provided arguments are not valid");
                 break;
             default:
                 writer.writeWithNewLine("A problem occurred. Please try again later");
