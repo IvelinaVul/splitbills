@@ -1,7 +1,5 @@
 package com.splitbills.client;
 
-import com.splitbills.commands.InvalidCommandException;
-
 import java.util.Arrays;
 
 public enum CommandName {
@@ -13,6 +11,7 @@ public enum CommandName {
     SPLIT_GROUP("split-group"),
     GET_STATUS("get-status"),
     EXIT("exit"),
+    BACK("back"),
     NO_SUCH_COMMAND_NAME("no-such-command-name");
     private String name;
 
@@ -25,7 +24,7 @@ public enum CommandName {
         return name;
     }
 
-    public static CommandName getCommandName(String commandName)  {
+    public static CommandName getCommandName(String commandName) {
         return Arrays.stream(values())
                 .filter(c -> c.name.equalsIgnoreCase(commandName))
                 .findFirst()
