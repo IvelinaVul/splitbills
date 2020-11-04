@@ -69,7 +69,6 @@ public class LoginMenu extends Menu {
     private void updateUserLoginInfo(List<String> arguments) {
         int first = 0;
         String token = arguments.get(first);
-        userLoginInfo.setLoggedIn(true);
         userLoginInfo.setAuthenticationToken(token);
     }
 

@@ -3,7 +3,6 @@ package com.splitbills.client;
 public class UserLoginInfo {
 
     private String authenticationToken;
-    private boolean loggedIn = false;
     private String username;
 
     public String getAuthenticationToken() {
@@ -14,12 +13,8 @@ public class UserLoginInfo {
         this.authenticationToken = authenticationToken;
     }
 
-    public void setLoggedIn(boolean loggedIn) {
-        this.loggedIn = loggedIn;
-    }
-
     public boolean isLoggedIn() {
-        return loggedIn;
+        return username != null;
     }
 
     public void setUsername(String username) {
