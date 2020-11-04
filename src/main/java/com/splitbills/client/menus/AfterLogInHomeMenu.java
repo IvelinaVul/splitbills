@@ -27,6 +27,7 @@ public class AfterLogInHomeMenu extends Menu {
         writer.writeWithNewLine("Please choose a command from the listed below: ");
         writer.writeWithNewLine("Add-group");
         writer.writeWithNewLine("Split-group");
+        writer.writeWithNewLine("Get-status");
         writer.writeWithNewLine("Back");
         writer.write(": ");
         String input = reader.readNextLine();
@@ -42,10 +43,15 @@ public class AfterLogInHomeMenu extends Menu {
             case SPLIT_GROUP:
                 menu = new SplitGroupMenu(splitbillsClient, userLoginInfo, reader, writer);
                 break;
+            case GET_STATUS:
+                menu = new GetStatusMenu(splitbillsClient, userLoginInfo, reader, writer);
+                break;
             case BACK:
                 isRunning = false;
+                userLoginInfo.setUsername(null);
                 menu = new BackMenu(splitbillsClient, userLoginInfo, reader, writer);
                 break;
+
             default:
                 menu = new InvalidCommandMenu(splitbillsClient, userLoginInfo, reader, writer);
         }
