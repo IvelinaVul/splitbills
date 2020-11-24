@@ -1,7 +1,7 @@
-# Splitbills
-##  Splitbills is a university project developed for the Modern Java Technologies course. It’s aim is to provide users with a way to monitor their shared expences with different groups of accquiantaces more easily. 
+## Splitbills
+  Splitbills is a university project developed for the Modern Java Technologies course. It’s aim is to provide users with a way to monitor their shared expences with different groups of accquiantaces more easily. 
 
-##  Splitbills let’s users create and give names to groups, so that they could  keep track of the reasons for sharing the bills. Every member of a group can split expenses with the other group members and provide a reason for paying. Thus, a user can not only monitor the money they owe, but also look at the amounts other people owe to him and the reasons behind. 
+  Splitbills let’s users create and give names to groups, so that they could  keep track of the reasons for sharing the bills. Every member of a group can split expenses with the other group members and provide a reason for paying. Thus, a user can not only monitor the money they owe, but also look at the amounts other people owe to him and the reasons behind. 
 
 ### Project Requirements:
 
